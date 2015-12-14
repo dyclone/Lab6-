@@ -13,6 +13,7 @@ import org.apache.commons.math3.util.Combinations;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
+import domain.GameRuleDomainModel;
 import enums.eGame;
 import enums.eRank;
 import enums.eSuit;
@@ -38,12 +39,14 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
+import logic.GameRuleBLL;
 import poker.app.MainApp;
 import pokerBase.Card;
 import pokerBase.Deck;
@@ -153,6 +156,8 @@ public class PokerTableController {
 	public Button btnPlay;
 	
 	private eGameState eGameState;
+	
+	private ToggleGroup tglgame;
 
 	public PokerTableController() {
 	}
@@ -262,6 +267,13 @@ public class PokerTableController {
 	@FXML
 	private void handlePlay() {
 
+		String strRuleName = mainApp.getRuleName();
+		HashMap<String, GameRuleDomainModel> hs = new HashMap();
+		hs = GameRuleBLL.getRuleHashSet();		
+		GameRuleDomainModel gr = hs.get(strRuleName);
+		
+		//tglGame = mainApp.getToggleGroup();
+		
 		eGameState = eGameState.StartOfGame;
 		
 		// Clear all players hands
@@ -284,6 +296,7 @@ public class PokerTableController {
 		winner4.setVisible(false);
 
 		// Get the Rule, start the Game
+		rle = new Rule(gr); 
 		gme = new GamePlay(rle);
 
 		// Add the seated players to the game
@@ -667,12 +680,5 @@ public class PokerTableController {
 		return (int) (Math.random() * (min - max)) * -1;
 
 	}
-	
-	@FXML
-    private void GetToggleGroup() {
-
-    	mainApp.getToggleGroup();
-    	
-    }
 
 }

@@ -3,7 +3,9 @@ package poker.app;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import domain.GameRuleDomainModel;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -77,8 +79,10 @@ public class MainApp extends Application {
 			primaryStage.setScene(scene);
 
 			// Give the controller access to the main app.
-			RootLayoutController controller = loader.getController();
-			controller.setMainApp(this);
+			//RootLayoutController controller = loader.getController();
+			rootController = loader.getController();
+			
+			rootController.setMainApp(this);
 
 			primaryStage.show();
 		} catch (IOException e) {
@@ -142,13 +146,17 @@ public class MainApp extends Application {
 		this.iGameType = iGameType;
 	}
 	
-	public ToggleGroup getToggleGroup()
+/*	public ToggleGroup getToggleGroup()
 	{
 		ToggleGroup tgl = rootController.getTglGames();
 		return tgl;
 		
 
-	}
+	}*/
 	
+	public String getRuleName()
+	{
+		return rootController.getRuleName();
+	}
 	
 }

@@ -3,6 +3,7 @@ package pokerBase;
 import java.util.ArrayList;
 
 import domain.CardDomainModel;
+import domain.GameRuleDomainModel;
 import enums.eGame;
 import enums.eRank;
 import enums.eSuit;
@@ -157,6 +158,21 @@ public class Rule {
 		}
 	}
 
+	public Rule(GameRuleDomainModel grd){
+		this.MaxNumberOfPlayers=grd.MAXNUMBEROFPLAYERS;
+		this.PlayerNumberOfCards = grd.PLAYERNUMBEROFCARDS;
+		this.NumberOfJokers = grd.NUMBEROFJOKERS;
+		this.PlayerCardsMin = grd.PLAYERCARDSMIN;
+		this.PlayerCardsMax = grd.PLAYERCARDSMAX;
+		this.CommunityCardsMin = grd.COMMUNITYCARDSMIN;
+		this.CommunityCardsMax = grd.COMMUNITYCARDSMAX;
+		this.PossibleHandCombinations = grd.POSSIBLEHANDCOMBINATIONS;
+		int[] iCardsToDraw = {2,1,1,1};
+		this.iCardsToDraw = iCardsToDraw;
+		
+		
+	}
+	
 	public int GetMaxNumberOfPlayers() {
 		return this.MaxNumberOfPlayers;
 	}
